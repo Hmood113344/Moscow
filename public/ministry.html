@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="ar">
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>تفاصيل الوزارة</title><link rel="stylesheet" href="/static/style.css"></head>
+<body>
+<header><h1>تفاصيل الوزارة</h1></header>
+<main id="content"><p>جارِ التحميل...</p></main>
+<script>
+  async function show(){
+    const id = location.hash.replace('#','') || '1';
+    const res = await fetch('/api/ministries/' + id);
+    if(!res.ok) return document.getElementById('content').innerText = 'لم يتم العثور على الوزارة';
+    const m = await res.json();
+    document.getElementById('content').innerHTML = '<h2>' + m.name + '</h2><p>' + m.description + '</p>';
+  }
+  show();
+</script>
+</body>
+</html>
